@@ -1,0 +1,104 @@
+@use 'variables' as *;
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-sm;
+  
+  @include tablet {
+    padding: 0 $spacing-md;
+  }
+}
+
+@mixin button-primary {
+  background-color: $color-text-highlight;
+  color: $color-bg-primary;
+  border: none;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// -- New Mixins Added for Pricing and TargetAudience --
+
+@mixin section-padding {
+  padding: $spacing-xl 0;
+  @include tablet {
+    padding: $spacing-xxl 0;
+  }
+}
+
+@mixin heading-style {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  @include tablet {
+    font-size: 2.5rem;
+  }
+}
+
+@mixin btn-base {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+@mixin btn-primary {
+  background-color: $primary-color;
+  color: $bg-dark;
+  border-color: transparent;
+  
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin btn-outline {
+  background-color: transparent;
+  color: $primary-color;
+  border-color: $primary-color;
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+    transform: translateY(-2px);
+  }
+}

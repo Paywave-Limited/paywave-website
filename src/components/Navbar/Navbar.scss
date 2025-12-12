@@ -1,0 +1,173 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.navbar {
+  padding: $spacing-md 0;
+  position: relative;
+  z-index: 100;
+
+  .navbar-container {
+    @include container;
+    @include flex-center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $color-text-highlight;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    img {
+      height: 32px;
+      width: auto;
+    }
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 70px; // Height of navbar
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: rgba($color-bg-primary, 0.98);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xl;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 99;
+
+    &.active {
+      transform: translateX(0);
+    }
+
+    @include desktop {
+      position: static;
+      height: auto;
+      width: auto;
+      background: none;
+      backdrop-filter: none;
+      flex-direction: row;
+      gap: $spacing-lg;
+      transform: none;
+      display: flex;
+    }
+
+    a {
+      color: $color-text-primary;
+      font-size: 1.5rem; // Larger for mobile tap targets
+      font-weight: 500;
+      transition: color 0.2s;
+
+      @include desktop {
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        color: $color-text-highlight;
+        text-decoration: none;
+      }
+    }
+
+    .mobile-actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+      margin-top: $spacing-md;
+      align-items: center;
+      width: 100%; // full width for buttons
+
+      @include desktop {
+        display: none; // Hide duplicating buttons on desktop
+      }
+
+      .btn-login-mobile {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: $color-text-primary;
+      }
+
+      .btn-signup-mobile {
+        @include button-primary;
+        width: 80%; // Large touch target
+        text-align: center;
+      }
+    }
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+
+    @include desktop {
+      display: none;
+    }
+
+    span {
+      width: 30px;
+      height: 3px;
+      background: $color-text-primary;
+      border-radius: 10px;
+      transition: all 0.3s linear;
+      position: relative;
+      transform-origin: 1px;
+    }
+
+    &.active {
+      span {
+        &:first-child {
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  .nav-actions {
+    display: none; // Hide on mobile to prevent overflow
+
+    @include desktop {
+      display: flex;
+      gap: $spacing-sm;
+    }
+
+    .btn-login {
+      color: $color-text-primary;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      
+      &:hover {
+        color: $color-text-highlight;
+        text-decoration: none;
+      }
+    }
+
+    .btn-signup {
+      @include button-primary;
+      font-size: 0.9rem;
+      padding: 0.5rem 1.2rem;
+    }
+  }
+}

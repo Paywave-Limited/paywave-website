@@ -1,0 +1,87 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.target-audience {
+  @include section-padding;
+  background-color: $bg-dark; // Or a slightly lighter shade if desired
+  color: $text-white;
+
+  .audience-container {
+    @include container;
+  }
+
+  .audience-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      @include heading-style;
+      margin-bottom: 1rem;
+
+      span {
+        color: $primary-color;
+      }
+    }
+
+    p {
+      color: $text-gray;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .audience-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: $border-radius-lg;
+    padding: 2.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      border-color: $primary-color;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $text-white;
+    }
+
+    p {
+      color: $text-gray;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .benefits-list {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        color: $text-light;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+
+        &::before {
+          content: '✓';
+          color: $secondary-color; // Or accent color
+          margin-right: 10px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

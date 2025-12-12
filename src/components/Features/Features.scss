@@ -1,0 +1,62 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.features {
+  padding: $spacing-xxl 0;
+  background-color: $color-bg-primary;
+
+  .features-container {
+    @include container;
+    
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: $spacing-xl;
+      
+      span {
+        color: $color-text-highlight;
+      }
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: $spacing-lg;
+    }
+
+    .feature-card {
+      background-color: $color-bg-secondary;
+      padding: $spacing-lg;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        
+        .icon {
+          color: $color-text-highlight;
+          transform: scale(1.1);
+        }
+      }
+
+      .icon {
+        font-size: 2.5rem;
+        margin-bottom: $spacing-md;
+        color: white;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: $spacing-sm;
+      }
+
+      p {
+        color: $color-text-secondary;
+        line-height: 1.6;
+      }
+    }
+  }
+}

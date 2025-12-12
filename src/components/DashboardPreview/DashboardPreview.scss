@@ -1,0 +1,212 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.dashboard-preview {
+  background-color: $color-bg-secondary;
+  border-radius: 12px;
+  padding: $spacing-md;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $color-text-primary;
+  font-family: $font-family-sans;
+  text-align: left;
+  overflow: hidden;
+  position: relative; // For decorative elements
+
+  // Glassmorphism subtle overlay
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      color.adjust($color-text-highlight, $alpha: -0.5), 
+      $color-text-highlight, 
+      color.adjust($color-text-highlight, $alpha: -0.5)
+    );
+  }
+
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: $spacing-sm;
+
+    .dash-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      .circle {
+        width: 12px;
+        height: 12px;
+        background-color: $color-text-highlight;
+        border-radius: 50%;
+      }
+    }
+
+    .dash-user {
+      display: flex;
+      gap: $spacing-xs;
+      
+      .avatar {
+        width: 24px;
+        height: 24px;
+        background-color: color.adjust($color-bg-primary, $lightness: 10%);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+
+    @include tablet {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+
+    .card {
+      background-color: color.adjust($color-bg-secondary, $lightness: 3%);
+      border-radius: 8px;
+      padding: $spacing-md;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+
+      h4 {
+        color: $color-text-secondary;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        margin-bottom: $spacing-sm;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .card-balance {
+      .amount {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: $spacing-xs;
+      }
+
+      .trend {
+        color: $color-text-highlight;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+
+        &.negative {
+          color: #ff4d4d;
+        }
+      }
+
+      .chart-container {
+        margin-top: $spacing-md;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        height: 100px;
+        padding-top: $spacing-sm;
+
+        .bar {
+          width: 8px;
+          background-color: color.adjust($color-bg-primary, $lightness: 10%);
+          border-radius: 4px;
+          transition: height 0.5s ease;
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--percentage);
+            min-height: 4px;
+            background-color: $color-text-highlight;
+            border-radius: 4px;
+            opacity: 0.8;
+          }
+          
+          &:hover::before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .card-transactions {
+      .transaction-list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+
+        .transaction-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: $spacing-xs 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .info {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+
+            .icon {
+              width: 32px;
+              height: 32px;
+              background-color: color.adjust($color-bg-primary, $lightness: 5%);
+              border-radius: 8px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1rem;
+            }
+
+            .details {
+              display: flex;
+              flex-direction: column;
+
+              .name {
+                font-size: 0.9rem;
+                font-weight: 500;
+              }
+              
+              .date {
+                font-size: 0.75rem;
+                color: $color-text-secondary;
+              }
+            }
+          }
+
+          .amount {
+            font-size: 0.9rem;
+            font-weight: 600;
+
+            &.expense {
+              color: white;
+            }
+            
+            &.income {
+              color: $color-text-highlight;
+            }
+          }
+        }
+      }
+    }
+  }
+}

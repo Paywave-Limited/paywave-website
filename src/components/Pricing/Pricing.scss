@@ -1,0 +1,143 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pricing-section {
+  @include section-padding;
+  background-color: $bg-dark-secondary; // Alternating background color
+  color: $text-white;
+
+  .pricing-container {
+    @include container;
+  }
+
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h2 {
+      @include heading-style;
+      margin-bottom: 1rem;
+      
+      span {
+        color: $primary-color;
+      }
+    }
+
+    p {
+      color: $text-gray;
+      font-size: 1.1rem;
+    }
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: center; // Align cards vertically
+  }
+
+  .pricing-card {
+    background: $bg-card;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: $border-radius-lg;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+
+    &.popular {
+      background: linear-gradient(180deg, rgba($primary-color, 0.1) 0%, $bg-card 100%);
+      border-color: $primary-color;
+      transform: scale(1.05);
+      z-index: 2;
+
+      &:hover {
+        transform: scale(1.05) translateY(-5px);
+      }
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: $primary-color;
+      color: $bg-dark;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $text-light;
+    }
+
+    .plan-price {
+      margin-bottom: 1.5rem;
+      
+      .currency {
+        font-size: 1.5rem;
+        vertical-align: top;
+      }
+      .amount {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: $text-white;
+      }
+      .period {
+        color: $text-gray;
+        margin-left: 5px;
+      }
+    }
+
+    .plan-description {
+      color: $text-gray;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2.5rem;
+      text-align: left;
+
+      li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: $text-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &::before {
+          content: '✔';
+          color: $primary-color;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .btn-plan {
+      @include btn-base;
+      width: 100%;
+      
+      &.btn-primary {
+        @include btn-primary;
+      }
+      
+      &.btn-outline {
+        @include btn-outline;
+      }
+    }
+  }
+}

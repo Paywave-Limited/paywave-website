@@ -1,0 +1,80 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  padding: $spacing-xl 0 $spacing-lg;
+  background-color: color.adjust($color-bg-primary, $lightness: -3%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  .footer-container {
+    @include container;
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-lg;
+      margin-bottom: $spacing-xl;
+      text-align: left;
+
+      .footer-brand {
+        .logo {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: $color-text-highlight;
+          margin-bottom: $spacing-md;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          img {
+            height: 32px;
+            width: auto;
+          }
+        }
+
+        p {
+          color: $color-text-secondary;
+          line-height: 1.6;
+          max-width: 300px;
+        }
+      }
+
+      .footer-links {
+        h4 {
+          color: $color-text-primary;
+          margin-bottom: $spacing-md;
+          font-size: 1.1rem;
+        }
+
+        ul {
+          li {
+            margin-bottom: $spacing-xs;
+
+            a {
+              color: $color-text-secondary;
+              font-size: 0.9rem;
+              transition: color 0.2s;
+
+              &:hover {
+                color: $color-text-highlight;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      padding-top: $spacing-lg;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+
+      p {
+        color: color.adjust($color-text-secondary, $lightness: -20%);
+        font-size: 0.85rem;
+      }
+    }
+  }
+}

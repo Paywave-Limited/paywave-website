@@ -1,0 +1,153 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+  padding: $spacing-xxl 0;
+  min-height: 80vh;
+  @include flex-center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  // Background radial gradient for parallax
+  .hero-bg-circle {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    /* transform is handled by React inline style for parallax */
+    width: 600px;
+    max-width: 90vw;
+    height: 600px;
+    max-height: 90vw;
+    background: radial-gradient(circle, rgba($color-text-highlight, 0.1) 0%, rgba($color-bg-primary, 0) 70%);
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform; // Optimize for animation
+  }
+
+  .hero-container {
+    @include container;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 0 $spacing-sm;
+
+    span {
+      color: $color-text-highlight;
+    }
+
+    @include tablet {
+      font-size: 3.5rem;
+    }
+    
+    @include desktop {
+      font-size: 4.5rem;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $color-text-secondary;
+    max-width: 600px;
+    line-height: 1.6;
+
+    @include tablet {
+      font-size: 1.25rem;
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    width: 100%;
+    max-width: 400px;
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: center;
+      width: auto;
+    }
+
+    .btn-primary {
+      @include button-primary;
+      font-size: 1rem;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: $color-text-primary;
+      padding: $spacing-sm $spacing-lg;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+
+      &:hover {
+        border-color: $color-text-highlight;
+        color: $color-text-highlight;
+      }
+    }
+  }
+
+  .hero-stats {
+    margin-top: $spacing-xl;
+    display: flex;
+    gap: $spacing-xl;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .label {
+        font-size: 0.9rem;
+        color: $color-text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  .hero-dashboard-container {
+    display: none; // Hide by default on mobile
+    margin-top: $spacing-xl;
+    width: 100%;
+    max-width: 900px;
+    perspective: 1000px;
+
+    @include tablet {
+      display: block; // Show on tablet/desktop
+    }
+
+    & > * {
+      transform: rotateX(5deg) scale(0.95);
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: rotateX(0deg) scale(1);
+      }
+    }
+  }
+}
